@@ -11,8 +11,7 @@ public class BSTree
 
    public BSTree()
    {
-   
-       
+	   root = null;
    }
 
     /**
@@ -29,6 +28,13 @@ public class BSTree
      */
    public void insert(Integer target)
    {
+	   if(root == null)
+	   {
+		   root = new BSTNode<>(target);
+	   }else 
+	   {
+		   root.insert(target);
+	   }
    }
 
 
@@ -38,7 +44,10 @@ public class BSTree
      */
    public Integer retrieve(Integer target)
    {
-	return null;
+	   if(root == null) {
+		   return null;
+	   }
+		return root.retrieve(target);
    }
 
 
@@ -52,7 +61,10 @@ public class BSTree
      */
    public int retrieveDepth(Integer target)
    {
-	return 0;
+	   if(root == null) {
+		   return 0;
+	   }
+		return root.retrieveDepth(target);
        
    }
 
@@ -95,7 +107,11 @@ public class BSTree
     */
    public Integer largest()
    {
-	return null;
+	   if(root == null)
+	   {
+		   return null;
+	   }
+	   return root.getLargest();
    
    }
 
@@ -120,6 +136,7 @@ public class BSTree
                public void accept(Integer i)
                {
                //need to add some code here...
+            	   L.add(i);
                }
             });
       }
@@ -136,7 +153,13 @@ public class BSTree
      */
    public int sum()
    {
-	return 0;
+	   int sum = 0;
+	   List<Integer> total = toList();
+	   for(int i = 0; i < total.size(); i++)
+	   {
+		   sum += total.get(i);
+	   }
+	   return sum;
    }
 
 
@@ -153,7 +176,15 @@ public class BSTree
      */
    public boolean myEquals(BSTree that)
    {
-	return false;
+	   if(root == null && that.isEmpty())
+	   {
+		   return true;
+	   }
+	   if(root != null && that.isEmpty() || root == null && !that.isEmpty())
+	   {
+		   return false;
+	   }
+	   return root.myEquals(that.root);
    
    }
 
